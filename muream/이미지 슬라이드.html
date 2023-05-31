@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      #slideShow {
+        width: 400px;
+        height: 500px;
+        position: relative;
+        margin: 100px auto;
+        overflow: hidden;
+      }
+      .slides {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: 0.5s ease-out;
+      }
+      .slides img {
+        width: 400px;
+        height: 500px;
+        object-fit: cover;
+      }
+      .slides li:not(:last-child) {
+        float: left;
+      }
+      .controller span {
+        position: absolute;
+        color: #fff;
+        text-align: center;
+        border-radius: 50%;
+        padding: 10px 20px;
+        top: 50%;
+        font-size: 1.3em;
+        cursor: pointer;
+      }
+      .prev {
+        left: 10px;
+      }
+      .prev:hover {
+        transform: translateX(-10px);
+      }
+      .next {
+        right: 10px;
+      }
+      .next:hover {
+        transform: translateX(10px);
+      }
+      .page {
+        position: absolute;
+        padding-left: 145px;
+        width: ;
+        bottom: 0;
+        text-align: center;
+      }
+      .dot {
+        display: inline-block;
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 4px;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: background-color 0.6s ease;
+      }
+      .active,
+      .dot:hover {
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="slideShow">
+      <ul class="slides">
+        <li><img src="images/BEST11.PNG" alt="BEST1" /></li>
+        <li><img src="images/BEST4.PNG" alt="BEST2" /></li>
+        <li><img src="images/BEST13.PNG" alt="BEST3" /></li>
+        <li><img src="images/BEST5.PNG" alt="BEST4" /></li>
+      </ul>
+      <p class="controller">
+        <span class="prev">&lang;</span>
+        <span class="next">&rang;</span>
+      </p>
+      <div class="page">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+    <script>
+      let slideani = document.getElementById("slideShow");
+      let slides = document.querySelector(".slides");
+      let slideImg = document.querySelectorAll(".slides li");
+      let dots = document.querySelectorAll(".dot");
+      let currentIdx = 0;
+      let slideCount = slideImg.length;
+      dots[0].className += " active";
+      let prev = document.querySelector(".prev"); //이전 버튼
+      let next = document.querySelector(".next"); //다음 버튼
+      let slideWidth = 400; //슬라이드이미지 넓이
+      makeClone(); // 처음이미지와 마지막 이미지 복사 함수
+      initfunction(); //슬라이드 넓이와 위치값 초기화 함수
+      function makeClone() {
+        let cloneSlide_first = slideImg[0].cloneNode(true);
+        let cloneSlide_last = slides.lastElementChild.cloneNode(true);
+        slides.append(cloneSlide_first);
+        //slides.prepend(cloneSlide_last);
+        slides.insertBefore(cloneSlide_last, slides.firstElementChild);
+      }
+      function initfunction() {
+        slides.style.width = slideWidth * (slideCount + 2) + "px";
+        slides.style.left = -slideWidth + "px";
+      }
+      function showSlide(n) {
+        for (i = 0; i < slideImg.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        dots[n].className += " active";
+        slides.style.left = -(n + 1) * slideWidth + "px";
+        slides.style.transition = "0.5s";
+      }
+      /*function currentSlide(n) {
+        showSlide((currentIdx = n));
+      }*/
+      dots.forEach(function (value, index) {
+        console.log(index);
+        value.onclick = function (e) {
+          let j = Array.from(dots).indexOf(e.target);
+          showSlide((currentIdx = j));
+        };
+      });
+      next.onclick = function () {
+        if (currentIdx <= slideCount - 1) {
+          //슬라이드이동
+          slides.style.left = -(currentIdx + 2) * slideWidth + "px";
+          slides.style.transition = "0.5s";
+        }
+        if (currentIdx === slideCount - 1) {
+          //마지막 슬라이드 일때
+          setTimeout(function () {
+            //0.5초동안 복사한 첫번째 이미지에서, 진짜 첫번째 위치로 이동
+            slides.style.left = -slideWidth + "px";
+            slides.style.transition = "0s";
+          }, 500);
+          currentIdx = -1;
+        }
+        currentIdx += 1;
+        for (i = 0; i < slideImg.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        dots[currentIdx].className += " active";
+      };
+      let interval = setInterval(function () {
+        next.onclick();
+      }, 2000);
+      prev.onclick = function () {
+        //이전 버튼 눌렀을때
+        console.log(currentIdx);
+        if (currentIdx >= 0) {
+          slides.style.left = -currentIdx * slideWidth + "px";
+          slides.style.transition = "0.5s";
+        }
+        if (currentIdx === 0) {
+          setTimeout(function () {
+            slides.style.left = -slideCount * slideWidth + "px";
+            slides.style.transition = "0s";
+          }, 500);
+          currentIdx = slideCount;
+        }
+        currentIdx -= 1;
+        for (i = 0; i < slideImg.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        dots[currentIdx].className += " active";
+      };
+      function slide_stop() {
+        clearInterval(interval);
+      }
+      slideani.addEventListener("mouseenter", function () {
+        slide_stop();
+      });
+      slideani.addEventListener("mouseleave", function () {
+        interval = setInterval(function () {
+          next.onclick();
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>

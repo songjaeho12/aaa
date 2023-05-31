@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Swiper demo</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="css/swiper.css" />
+
+    <!-- Demo styles -->
+    <style>
+      html,
+      body {
+        position: relative;
+        height: 100%;
+      }
+      body {
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
+      .swiper-container {
+        width: 1280px;
+        height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid #000;
+      }
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .swiper-slide img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Swiper -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="images/BEST13.PNG" alt="photo1" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images/BEST14.PNG" alt="photo2" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images/BEST15.PNG" alt="photo3" />
+        </div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="js/swiper.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".swiper-container", {
+        pagination: ".swiper-pagination",
+        nextButton: ".swiper-button-next",
+        prevButton: ".swiper-button-prev",
+        slidesPerView: 1,
+        paginationClickable: true,
+        //spaceBetween: 30,
+        loop: true,
+        speed: 2000,
+        autoplay: true,
+      });
+    </script>
+  </body>
+</html>

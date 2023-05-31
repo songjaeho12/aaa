@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="wrap">
+        <div class="top">
+            <div class="top_menu clearfix">
+                <h2><a href="#">MUREAM</a></h2>
+                <ul class="clearfix">
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="STYLE.html" target="new">STYLE</a></li>
+                    <li><a href="#">SHOP</a>
+                        <ul class="sub">
+                            <li><a href="NEW.html" target="new">NEW</a></li>
+                            <li><a href="BEST.html" target="new">BEST</a></li>
+                            <li><a href="OUTWEAR.html" target="new">OUTWEAR</a></li>
+                            <li><a href="TOP.html" target="new">TOP</a></li>
+                            <li><a href="BOTTOM.html" target="new">BOTTOM</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">MY</a></li>
+                    <li><a href="#">
+                            <span class="material-symbols-outlined">
+                            search
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="gnb">
+            <div class="inner">
+                <ul class="menu">
+                    <li><a href="#">new</a></li>
+                    <li><a href="#">best</a></li>
+                    <li><a href="#">outwear</a></li>
+                    <li><a href="#">top</a></li>
+                    <li><a href="#">bottom</a></li>
+                </ul>
+                <ul class="rmenu">
+                    <li><a href="#">고객센터</a></li>
+                    <li><a href="#">관심상품</a></li>
+                    <li class="login"><a href="login.html" target="new">로그인</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="weeklybest">
+            <p>WEEKLY BEST</p>
+        </div>
+        <div id="slideShow">
+            <ul class="slides">
+              <li><img src="images/BEST11.PNG" alt="BEST1" /></li>
+              <li><img src="images/BEST4.PNG" alt="BEST2" /></li>
+              <li><img src="images/BEST13.PNG" alt="BEST3" /></li>
+              <li><img src="images/BEST5.PNG" alt="BEST4" /></li>
+            </ul>
+            <p class="controller">
+              <span class="prev">&lang;</span>
+              <span class="next">&rang;</span>
+            </p>
+            <div class="page">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+          <script>
+            let slideani = document.getElementById("slideShow");
+            let slides = document.querySelector(".slides");
+            let slideImg = document.querySelectorAll(".slides li");
+            let dots = document.querySelectorAll(".dot");
+            let currentIdx = 0;
+            let slideCount = slideImg.length;
+            dots[0].className += " active";
+            let prev = document.querySelector(".prev"); //이전 버튼
+            let next = document.querySelector(".next"); //다음 버튼
+            let slideWidth = 400; //슬라이드이미지 넓이
+            makeClone(); // 처음이미지와 마지막 이미지 복사 함수
+            initfunction(); //슬라이드 넓이와 위치값 초기화 함수
+            function makeClone() {
+              let cloneSlide_first = slideImg[0].cloneNode(true);
+              let cloneSlide_last = slides.lastElementChild.cloneNode(true);
+              slides.append(cloneSlide_first);
+              //slides.prepend(cloneSlide_last);
+              slides.insertBefore(cloneSlide_last, slides.firstElementChild);
+            }
+            function initfunction() {
+              slides.style.width = slideWidth * (slideCount + 2) + "px";
+              slides.style.left = -slideWidth + "px";
+            }
+            function showSlide(n) {
+              for (i = 0; i < slideImg.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+              }
+              dots[n].className += " active";
+              slides.style.left = -(n + 1) * slideWidth + "px";
+              slides.style.transition = "0.5s";
+            }
+            /*function currentSlide(n) {
+              showSlide((currentIdx = n));
+            }*/
+            dots.forEach(function (value, index) {
+              console.log(index);
+              value.onclick = function (e) {
+                let j = Array.from(dots).indexOf(e.target);
+                showSlide((currentIdx = j));
+              };
+            });
+            next.onclick = function () {
+              if (currentIdx <= slideCount - 1) {
+                //슬라이드이동
+                slides.style.left = -(currentIdx + 2) * slideWidth + "px";
+                slides.style.transition = "0.5s";
+              }
+              if (currentIdx === slideCount - 1) {
+                //마지막 슬라이드 일때
+                setTimeout(function () {
+                  //0.5초동안 복사한 첫번째 이미지에서, 진짜 첫번째 위치로 이동
+                  slides.style.left = -slideWidth + "px";
+                  slides.style.transition = "0s";
+                }, 500);
+                currentIdx = -1;
+              }
+              currentIdx += 1;
+              for (i = 0; i < slideImg.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+              }
+              dots[currentIdx].className += " active";
+            };
+            let interval = setInterval(function () {
+              next.onclick();
+            }, 2000);
+            prev.onclick = function () {
+              //이전 버튼 눌렀을때
+              console.log(currentIdx);
+              if (currentIdx >= 0) {
+                slides.style.left = -currentIdx * slideWidth + "px";
+                slides.style.transition = "0.5s";
+              }
+              if (currentIdx === 0) {
+                setTimeout(function () {
+                  slides.style.left = -slideCount * slideWidth + "px";
+                  slides.style.transition = "0s";
+                }, 500);
+                currentIdx = slideCount;
+              }
+              currentIdx -= 1;
+              for (i = 0; i < slideImg.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+              }
+              dots[currentIdx].className += " active";
+            };
+            function slide_stop() {
+              clearInterval(interval);
+            }
+            slideani.addEventListener("mouseenter", function () {
+              slide_stop();
+            });
+            slideani.addEventListener("mouseleave", function () {
+              interval = setInterval(function () {
+                next.onclick();
+              }, 2000);
+            });
+          </script>
+        <div class="product">
+            <div class="inner row1">
+                <h2>style</h2>
+                <ul>
+                    <li>
+                        <p><img src="images/style1.PNG" alt="PRODUCT1"></p>
+                        <p>너드 오버핏 데님 집업자켓 2C<br>KRW 49,000</p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><img src="images/style2.PNG" alt="PRODUCT1"></p>
+                        <p>아비크 레더 크롭 블루종 3C<br>KRW 49,000</p>
+                        
+                        <span></span>
+                        
+                    </li>
+                    <li>
+                        <p><img src="images/style3.PNG" alt="PRODUCT1"></p>
+                        <p>S/S 드로우 하이넥 골지 집업 3C<br>KRW 49,500</p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><img src="images/style4.PNG" alt="PRODUCT1"></p>
+                        <p>Suede corduroy crop blouson 2CKRW 99,000<br></p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+        <div class="product">
+            <div class="inner row2">
+                <h2>BEST</h2>
+                <ul>
+                    <li>
+                        <p><img src="images/BEST2.PNG" alt="PRODUCT1"></p>
+                        <p>레이 스트링 베이직 카고팬츠 3C<br>KRW 33,000</p>
+                        
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><img src="images/BEST3.PNG" alt="PRODUCT1"></p>
+                        <p>Nordi varsity knit zip-up 3C<br>KRW 55,000</p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><img src="images/BEST4.PNG" alt="PRODUCT1"></p>
+                        <p>Coating hood windbreaker 3C<br>KRW 49,500</p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><a href="sub01.html" target="new"><img src="images/BEST5.PNG" alt="PRODUCT1"></a></p>
+                        <p>Ville pigment sweatshirts 3C<br>KRW 49,000</p>
+                        <p></p>
+                        <span></span>
+                    </li>  
+                </ul>
+            </div>
+        </div>
+        <div class="product">
+            <div class="inner row3">
+                <h2>PRODUCT</h2>
+                <ul>
+                    <li>
+                        <p><img src="images/PRODUCT1.PNG" alt="PRODUCT1"></a></p>
+                        <p>SUZUKI dry mash half T-shirts<br>KRW 37,000</p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT8.PNG" alt="PRODUCT1"></p>
+                        <p>미들 카고 코튼 스트링팬츠 3C<br>KRW 49,000</p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT2.PNG" alt="PRODUCT1"></p>
+                        <p>로아크 롱 스냅 카고팬츠 2C<br>KRW 66,000</p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT3.PNG" alt="PRODUCT1"></p>
+                        <p>바이퍼 대디 원버튼 블레이져 2C<br>KRW 79,000</p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><a href="sub01.html" target="new"><img src="images/PRODUCT4.PNG" alt="PRODUCT1"></a></p>
+                        <p>바이퍼 쓰리턱 슬랙스 2C<br>KRW 39,500</p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT5.PNG" alt="PRODUCT1"></p>
+                        <p>타입 오버 나염 후드 2C<br>KRW 39,500</p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT6.PNG" alt="PRODUCT1"></p>
+                        <p>Edge raw straight denim<br>KRW 39,000</p>
+                        <p></p>
+                        <span></span>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT7.PNG" alt="PRODUCT1"></p>
+                        <p>S/S 린넨 하찌 밴딩 후드집업 4C<br>KRW 49,000</p>
+                        <p></p>
+                        <span></span>
+                        <a class="colorbox" href=""></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="product showmore">
+            <div class="inner">
+                <h2>PRODUCT</h2>
+                <ul>
+                    <li>
+                        <p><img src="images/PRODUCT1.PNG" alt="PRODUCT1"></a></p>
+                        <p>S/S 린넨 하찌 밴딩 후드집업 5C<br>KRW 49,000</p>
+                        <p></p>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT8.PNG" alt="PRODUCT1"></p>
+                        <p>S/S 린넨 하찌 밴딩 후드집업 5C<br>KRW 49,000</p>
+                        <p></p>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT2.PNG" alt="PRODUCT1"></p>
+                        <p>S/S 린넨 하찌 밴딩 후드집업 5C<br>KRW 49,000</p>
+                        <p></p>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT3.PNG" alt="PRODUCT1"></p>
+                        <p>S/S 린넨 하찌 밴딩 후드집업 5C<br>KRW 49,000</p>
+                        <p></p>
+                    </li>
+                    <li>
+                        <p><a href="sub01.html" target="new"><img src="images/PRODUCT4.PNG" alt="PRODUCT1"></a></p>
+                        <p>S/S 린넨 하찌 밴딩 후드집업 5C<br>KRW 49,000</p>
+                        <p></p>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT5.PNG" alt="PRODUCT1"></p>
+                        <p>S/S 린넨 하찌 밴딩 후드집업 5C<br>KRW 49,000</p>
+                        <p></p>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT6.PNG" alt="PRODUCT1"></p>
+                        <p>Edge raw straight denim<br>KRW 39,000</p>
+                        <p></p>
+                    </li>
+                    <li>
+                        <p><img src="images/PRODUCT7.PNG" alt="PRODUCT1"></p>
+                        <p>S/S 린넨 하찌 밴딩 후드집업 5C<br>KRW 49,000</p>
+                        <p></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="seemore">
+            <div class="more"><a href="#">더보기1/2</a></div>
+            
+        </div>
+        
+        <div class="notice">
+            <p>회사소개  이용안내  개인정보취급방침  이용약관</p>
+
+
+                <p>상호 : MUREAM 대표자 : 송재호</p> 
+                
+                <p>전화 : 010-7585-6617</p>
+                
+                <p>개인정보보호책임자 : 송재호</p>
+                
+                <p>이메일 : (woghzxc123@naver.com)</p>
+                
+                <p>주소 : 대전광역시 대덕구</p>
+
+                <p>insta gram : x.eus_</p>
+        </div>
+        <div id="style01"></div>
+    </div>
+</body>
+</html>

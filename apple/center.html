@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/owl.carousel.css" />
+    <link rel="stylesheet" href="css/owl.theme.default.css" />
+    <link rel="stylesheet" href="css/all.css" />
+    <script src="js/jquery-3.6.4.min.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script>
+      $(function () {
+        $(".loop").owlCarousel({
+          center: true,
+          items: 2,
+          loop: true,
+          margin: 10,
+          responsive: {
+            600: {
+              items: 4,
+            },
+          },
+        });
+        $(".nonloop").owlCarousel({
+          center: true,
+          items: 2,
+          loop: false,
+          margin: 10,
+          responsive: {
+            600: {
+              items: 4,
+            },
+          },
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="owl-carousel owl-theme" id="slide">
+      <div class="item">
+        <a href="BEST.html"><img src="images/main1_png.png" alt="" /></a>
+      </div>
+      <div class="item">
+        <a href="BOTTOM.html"><img src="images/main1 copy.png" alt="" /></a>
+      </div>
+      <div class="item">
+        <a href="TOP.html"><img src="images/main3.jpg" alt="" /></a>
+      </div>
+      <div class="item">
+        <a href="OUTWEAR.html"><img src="images/main5.PNG" alt="" /></a>
+      </div>
+    </div>
+  </body>
+</html>

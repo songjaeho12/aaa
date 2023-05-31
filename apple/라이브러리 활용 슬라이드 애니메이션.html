@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/owl.carousel.css" />
+    <link rel="stylesheet" href="css/owl.theme.default.css" />
+    <link rel="stylesheet" href="css/all.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/jquery-3.6.4.min.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script>
+      $(function () {
+        $(".loop").owlCarousel({
+          center: true,
+          loop: true,
+          margin: 10,
+          nav: true,
+          items: 2,
+          autoWidth: true,
+          autoplay: true,
+          autoplayTimeout: 3000,
+          autoplayHoverPause: true,
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="movie">
+      <div class="loop owl-carousel owl-theme" id="slide">
+        <div class="item" style="width: 1350px">
+          <img src="images/photo1.jpg" alt="" width="1920" />
+        </div>
+        <div class="item" style="width: 1350px">
+          <img src="images/photo2.jpg" alt="" width="1920" />
+        </div>
+        <div class="item" style="width: 1350px">
+          <img src="images/photo3.jpg" alt="" width="1920" />
+        </div>
+        <div class="item" style="width: 1350px">
+          <img src="images/photo4.jpg" alt="" width="1920" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

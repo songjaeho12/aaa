@@ -1,0 +1,457 @@
+@charset "utf-8";
+@font-face {
+  font-family: opensans;
+  src: url(../webfonts/OpenSans-Regular.woff) format("woff");
+}
+@keyframes menumove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+/*@media (max-width:700px){ /*가로 너비가 600px 이하일 때 아래 스타일 적용
+    #main {
+        display: block;    
+    }
+}
+#main #contents {  
+    margin-bottom: 10px; 
+    margin-right: 0px;
+}
+#main #sidebar {
+    min-height: 0;
+}*/
+
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: block;
+}
+.clearfix::after {
+  clear: both;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style: none;
+}
+.newproduct {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.newproduct p {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+.newproduct p:last-child {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #aaa;
+}
+.palm {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  text-align: left;
+  width: 1900px;
+  height: 700px;
+}
+.palm img {
+  margin-left: -35px;
+  width: 400px;
+  height: 600px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.palm li p:last-child {
+  padding-top: 20px;
+}
+.POPULAR {
+  display: flex;
+  margin: 0 auto;
+  margin-top: -80px;
+  justify-content: space-evenly;
+  width: 25%;
+}
+.POPULAR p {
+  padding-right: 20px;
+}
+.weeklybest p {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 120px;
+}
+#slide {
+  position: relative;
+  width: 1280px;
+  height: 500px;
+  margin: 0 auto;
+  top: -80px;
+}
+#slide img {
+  width: 1280px;
+  height: 500px;
+  object-fit: cover;
+}
+.owl-carousel .owl-nav button.owl-prev span,
+.owl-carousel .owl-nav button.owl-next span {
+  position: absolute;
+  width: 21px;
+  height: 39px;
+  top: 50%;
+  background-image: url(../images/btns.png);
+  text-indent: -9999px;
+}
+.owl-carousel .owl-nav button.owl-prev span {
+  left: 50px;
+  background-position: -6px -4px;
+}
+.owl-carousel .owl-nav button.owl-next span {
+  right: 50px;
+  background-position: -29px -4px;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+body {
+  font: 14px opensans, "맑은 고딕", sans-serif;
+  font-weight: 580;
+}
+.top {
+  background: #000;
+  height: 87px;
+}
+.top_menu {
+  width: 1280px;
+  margin: 0 auto;
+}
+.top_menu > ul > li > a:hover {
+  animation: menumove 0.5s forwards;
+}
+.top_menu h2 a {
+  color: #fff;
+  float: left;
+  line-height: 87px;
+}
+.top_menu ul {
+  float: right;
+  position: relative;
+}
+.top_menu ul li a:hover {
+  opacity: 0.7;
+}
+.top_menu ul li:hover .sub {
+  display: block;
+}
+.top_menu ul .sub {
+  display: none;
+  position: absolute;
+  left: 120px;
+  top: 80px;
+  width: 40%;
+  overflow: hidden;
+  text-align: center;
+  background: #000;
+}
+.top_menu ul .sub li:hover {
+  opacity: 0.7;
+}
+.top_menu > ul > li {
+  float: left;
+}
+.top_menu > ul > li > a {
+  display: block;
+  color: #fff;
+  line-height: 87px;
+  margin-left: 20px;
+}
+.top_menu .sub li a {
+  line-height: 30px;
+  color: #fff;
+}
+.top_menu ul li a span {
+  font-size: 16px;
+}
+.gnb {
+  clear: both;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-top: 50px;
+  height: 80px;
+}
+.gnb .inner .menu li:hover {
+  color: #333;
+  opacity: 0.5;
+  text-decoration: underline;
+}
+.gnb .inner .rmenu li:hover {
+  color: #333;
+  opacity: 0.5;
+  text-decoration: underline;
+}
+.gnb .inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+}
+.gnb .inner .menu,
+.gnb .inner .rmenu {
+  display: flex;
+  align-items: center;
+}
+.gnb .inner a {
+  text-transform: uppercase;
+}
+.gnb .inner .menu a {
+  margin-right: 20px;
+}
+.gnb .inner .rmenu li {
+  margin-left: 20px;
+}
+.gnb .inner .rmenu .login {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border: 1px solid #ccc;
+}
+.gnb .inner .rmenu .login:hover {
+  background: #ccc;
+}
+.product {
+  border-top: 1px solid #ccc;
+}
+.product .inner {
+  width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.product .inner span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+
+  /*margin: 10px 0 10px 0;*/
+}
+.colorbox {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  /*margin: 10px 0 10px 0;*/
+}
+/*.colorbox::before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  bottom: 5px;
+  left: 60px;
+  background-color: green;
+}*/
+.product .row1 li:first-child span {
+  background: #000;
+}
+.product .row1 li:nth-child(2) span {
+  background: brown;
+}
+.product .row1 li:nth-child(3) span {
+  background: blue;
+}
+.product .row1 li:nth-child(4) span {
+  background: brown;
+}
+.product .row2 li:first-child span {
+  background: #000;
+}
+.product .row2 li:nth-child(2) span {
+  background: #000;
+}
+.product .row2 li:nth-child(3) span {
+  background: #000;
+}
+.product .row2 li:nth-child(4) span {
+  background: #65746a;
+}
+.product .row3 li:nth-child(2) span {
+  background: #000;
+}
+.product .row3 li:nth-child(3) span {
+  background: #000;
+}
+.product .row3 li:nth-child(4) span {
+  background: #000;
+}
+.product .row3 li:nth-child(5) span {
+  background: #000;
+}
+.product .row3 li:nth-child(6) span {
+  background: #000;
+}
+.product .row3 li:nth-child(8) span {
+  background: tan;
+}
+.product .inner span::after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  bottom: 3px;
+  left: 20px;
+}
+.product .inner span::before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  bottom: 3px;
+  left: 40px;
+}
+.product .row1 li:first-child span::after {
+  background: skyblue;
+}
+.product .row1 li:nth-child(2) span::after {
+  background: burlywood;
+}
+.product .row1 li:nth-child(2) span::before {
+  background: slateblue;
+}
+.product .row1 li:nth-child(3) span::after {
+  background: black;
+}
+.product .row1 li:nth-child(3) span::before {
+  background: green;
+}
+.product .row1 li:nth-child(4) span::after {
+  background: black;
+}
+.product .row2 li:first-child span::after {
+  background: red;
+}
+.product .row2 li:first-child span::before {
+  background: khaki;
+}
+.product .row2 li:nth-child(2) span::after {
+  background: green;
+}
+.product .row2 li:nth-child(2) span::before {
+  background: gray;
+}
+.product .row2 li:nth-child(3) span::after {
+  background: red;
+}
+.product .row2 li:nth-child(3) span::before {
+  background: blue;
+}
+.product .row2 li:nth-child(4) span::after {
+  background: tomato;
+}
+.product .row2 li:nth-child(4) span::before {
+  background: cornflowerblue;
+}
+.product .row3 li:nth-child(2) span::after {
+  background: burlywood;
+}
+.product .row3 li:nth-child(2) span::before {
+  background: whitesmoke;
+}
+.product .row3 li:nth-child(3) span::after {
+  background: silver;
+}
+.product .row3 li:nth-child(4) span::after {
+  background: burlywood;
+}
+.product .row3 li:nth-child(5) span::after {
+  background: palevioletred;
+}
+.product .row3 li:nth-child(6) span::after {
+  background: grey;
+}
+.product .row3 li:nth-child(8) span::after {
+  background: black;
+}
+.product .row3 li:nth-child(8) span::before {
+  background: gray;
+}
+.product .inner h2 {
+  width: 200px;
+  text-transform: uppercase;
+}
+.product .inner ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 1080px;
+}
+.product .inner ul li {
+  position: relative;
+  flex: 0 1 250px;
+  margin-top: 50px;
+}
+.product .inner ul li p:first-child {
+  width: 100%;
+
+  overflow: hidden;
+  height: 330px;
+}
+.product .inner ul li p:first-child:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.product .inner ul li p img {
+  width: 250px;
+}
+.product .inner ul li p:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.showmore {
+  display: none;
+}
+div .seemore {
+  padding: 50px;
+  border-bottom: 1px solid #ccc;
+}
+div .more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid #000;
+  margin-left: 900px;
+  margin-top: 30px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+div .seemore .more:hover {
+  background: #ccc;
+}
+
+div .notice {
+  border-top: px solid #ccc;
+  display: block;
+  height: 200px;
+  line-height: 30px;
+  margin-left: 800px;
+}
+.style01 {
+  position: fixed;
+}
